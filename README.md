@@ -1,4 +1,4 @@
-# Angular_CRUD
+# Angular CRUD
 Um sistema CRUD em Angular. Eu fiz este sistema há algum tempo atrás como apoio à um tutorial
 e recentemente modifiquei e adaptei ele para o Angular 11. O objetivo é demonstar conceitos do Angular num sistema
 integrado e completamente funcional, já que a maioria dos tutoriais disponíveis tratam apenas de aspectos
