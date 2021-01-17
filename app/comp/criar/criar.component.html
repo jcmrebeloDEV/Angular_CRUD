@@ -1,0 +1,116 @@
+<mensagem [mostraMsgConectando]="conectando"></mensagem>
+
+<div class="card m-3">
+    <h5 class="card-header">Criar Usuário</h5>
+   
+    <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+
+
+                    <label>Cpf</label>
+                    <input type="text" formControlName="cpf" class="form-control" [ngClass]="{ 'is-invalid': (submitted && f.cpf.errors) || ((f.cpf.touched || f.cpf.dirty)  && 
+                        !submitted && f.cpf.errors && !f.cpf.errors.required && !f.cpf.errors.cpfInvalido) }" />
+                    <div *ngIf="submitted && f.cpf.errors" class="invalid-feedback">
+                        <div *ngIf="f.cpf.errors.required">Cpf é requerido</div>
+                        <div *ngIf="f.cpf.errors.cpfInvalido">Cpf inválido</div>
+                        <div *ngIf="f.cpf.errors.cpfIndisponivel">Cpf já cadastrado. Por favor escolha
+                            outro</div>
+                    </div>
+
+                    <!-- alerta o usuario para o erro de cpf já cadastrado enquanto ele escreve (antes de enviar o form)-->
+                    <div *ngIf="(f.cpf.touched || f.cpf.dirty)  && !submitted && f.cpf.errors" class="invalid-feedback">
+                        <div *ngIf="f.cpf.errors.cpfIndisponivel">Cpf já cadastrado. Por favor escolha
+                            outro</div>
+                    </div>
+
+                </div>
+                <div class="form-group col-5">
+                    <label>UserName</label>
+                    <input type="text" formControlName="userName" class="form-control"
+                        [ngClass]="{ 'is-invalid': (submitted && f.userName.errors) || ((f.userName.touched || f.userName.dirty)  && !submitted && f.userName.errors &&!f.userName.errors.required) }" />
+                    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                        <div *ngIf="f.userName.errors.required">UserName é requerido</div>
+                        <div *ngIf="f.userName.errors.userNameIndisponivel">UserName já cadastrado. Por favor escolha
+                            outro</div>
+                    </div>
+
+                    <!-- alerta o usuario para o erro de usuario já cadastrado enquanto ele escreve (antes de enviar o form)-->
+                    <div *ngIf="(f.userName.touched || f.userName.dirty)  && !submitted && f.userName.errors"
+                        class="invalid-feedback">
+                        <div *ngIf="f.userName.errors.userNameIndisponivel">UserName já cadastrado. Por favor escolha
+                            outro</div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="form-group col-5">
+                    <label>Nome</label>
+                    <input type="text" formControlName="nome" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
+                    <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                        <div *ngIf="f.nome.errors.required">Nome é requerido</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Data de nascimento</label>
+                    <input type="text" placeholder="01/01/2000" formControlName="nascimento" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.nascimento.errors }" />
+                    <div *ngIf="submitted && f.nascimento.errors " class="invalid-feedback">
+                        <div *ngIf="f.nascimento.errors.required">Data de nascimento é requerido</div>
+                        <div *ngIf="f.nascimento.errors.pattern">Data de nascimento deve estar no formato dia/mes/ano
+                            ex: 01/01/1900</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Email</label>
+                    <input type="text" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email é requerido</div>
+                        <div *ngIf="f.email.errors.email">Email deve ser válido</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Senha do usuário para acesso ao banco de dados</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Senha é requerido</div>
+                        <div *ngIf="f.password.errors.minlength">Senha deve ter no minimo 6 caracteres</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Confirmação de senha</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">Confirmação de senha é requerido</div>
+                        <div *ngIf="f.confirmPassword.errors.passwordMismatch"> Senha e confirmação de senha devem ser
+                            iguais </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" formControlName="aceitaTermos" id="aceitaTermos" class="form-check-input"
+                    [ngClass]="{ 'is-invalid': submitted && f.aceitaTermos.errors }" />
+                <label for="aceitaTermos" class="form-check-label">Usuário aceita os termos de uso adicionais</label>
+                <!-- div *ngIf="submitted && f.aceitaTermos.errors" class="invalid-feedback">Campo requerido</div -->
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-1">Enviar</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Limpar</button>
+                <div><button class="btn btn-secondary" (click)="retorna()">Cancelar</button></div>
+
+            </div>
+        </form>
+    </div>
+</div>

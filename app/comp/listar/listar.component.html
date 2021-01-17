@@ -1,0 +1,47 @@
+<mensagem [mostraMsgConectando]="conectando"></mensagem>
+
+<div class="table-responsive">
+    <div> <p>Para editar um usuário, clique no seu nome</p></div>
+    <div> <button class="btn btn-primary mr-1" (click)="carregaLista()">Recarregar Lista</button></div>
+   
+    <form [formGroup]="grupo">
+        <table formArrayName="listaDeSelecaoDeUsuarios" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 10px;"></th>
+                    <th scope="col">Cpf</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Nascimento</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let elemento of listaDeSelecaoDeUsuarios.controls; index as i">
+                    <td><input type="checkbox" [formControlName]="i" placeholder="elemento"></td>
+                    <td>
+                        <p>{{listaDeUsuarios[i].getCpf()}}</p>
+                    </td>
+                    <td>
+                        <p><a routerLink="/Editar/{{listaDeUsuarios[i].getCpf()}}">{{listaDeUsuarios[i].getNome()}}</a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>{{listaDeUsuarios[i].getNascimento() | date: 'dd/MM/yyyy'}}</p>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+    </form>
+  
+    <div *ngIf="listaDeSelecaoDeUsuarios.length==0">Nenhum Registro</div>
+
+    <div *ngIf="listaDeSelecaoDeUsuarios.length>0">
+        <button class="btn btn-primary mr-1" (click)="excluir()">Excluir</button>
+        <button class="btn btn-primary mr-1" (click)="marcaDesmarcaTodos()">Marcar/Desmarcar Todos</button>
+    </div>
+
+</div>
