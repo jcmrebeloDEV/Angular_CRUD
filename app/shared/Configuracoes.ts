@@ -1,5 +1,14 @@
 import { HttpHeaders } from '@angular/common/http';
+/*
+As constantes aqui declaradas poderiam ser colocadas no arquivo
 
+/src/environments/environments.ts e em
+
+/src/environments/environments.prod.ts
+
+(Este último arquivo substitui o primeiro depois da compilação
+para produção).
+*/
 export class Configuracoes {
 
   private static urlBase: string = "http://localhost:3000";
