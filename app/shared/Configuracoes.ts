@@ -7,7 +7,7 @@ As constantes aqui declaradas poderiam ser colocadas no arquivo
 /src/environments/environments.prod.ts
 
 (Este último arquivo substitui o primeiro depois da compilação
-para produção).
+para produção usando 'ng build --prod` ).
 */
 export class Configuracoes {
 
